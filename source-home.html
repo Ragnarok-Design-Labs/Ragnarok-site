@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ragnarok Design Lab — Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap">
+<style>
+/* =========================================================
+   RAGNAROK DESIGN LAB — Home (recreation)
+   ========================================================= */
+:root{
+  --bg:#ffffff;
+  --ink:#0a0a0b;
+  --ink-2:#1a1a1d;
+  --muted:#6b6b73;
+  --muted-2:#9a9aa3;
+  --hair:#e8e8ec;
+  --hair-2:#f0f0f3;
+  --panel:#f5f5f8;
+  --panel-2:#eef0f4;
+  --accent:#6b2fe0;         /* purple */
+  --accent-soft:#a78bff;
+  --warn:#d93636;
+  --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --serif:"Instrument Serif", "Times New Roman", serif;
+  --sans:"Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,svg{max-width:100%;display:block}
+hr{border:none;height:1px;background:var(--hair)}
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+
+/* =========================================================
+   typography utilities
+   ========================================================= */
+.mono{font-family:var(--mono);font-weight:400;font-feature-settings:"ss01","ss02"}
+.serif{font-family:var(--serif);font-weight:400}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted)}
+.eyebrow .slash{color:var(--muted-2);margin:0 .5em}
+
+.h-display{font-family:var(--serif);font-weight:400;font-size:clamp(44px,6.6vw,96px);line-height:1.02;letter-spacing:-.025em;color:var(--ink)}
+.h-display em{font-style:italic;color:var(--muted)}
+.h-section{font-family:var(--serif);font-weight:400;font-size:clamp(36px,4.4vw,64px);line-height:1.04;letter-spacing:-.02em}
+.h-section em{font-style:italic;color:var(--muted)}
+.h-section .accent{color:var(--accent)}
+.h-card{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.1;letter-spacing:-.01em}
+
+.body-lg{font-size:17px;line-height:1.5;color:var(--ink-2)}
+.body{font-size:15px;line-height:1.55;color:var(--ink-2)}
+.sm{font-size:13px;line-height:1.5;color:var(--muted)}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.82);backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid var(--hair);
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink)}
+.brand .sigil{
+  width:18px;height:18px;border:1px solid var(--ink);position:relative;
+}
+.brand .sigil::before, .brand .sigil::after{
+  content:"";position:absolute;inset:0;
+}
+.brand .sigil::before{border-top:1px solid var(--ink);transform:translate(3px,3px);width:12px;height:12px;border-left:1px solid var(--ink);border-right:none;border-bottom:none}
+.brand .sigil::after{background:var(--accent);width:4px;height:4px;top:7px;left:7px}
+.brand-word{display:flex;gap:10px;align-items:center}
+.brand-word .dot{width:3px;height:3px;background:var(--muted-2);border-radius:50%}
+
+nav.primary{display:flex;gap:26px}
+nav.primary a{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding:8px 2px;position:relative}
+nav.primary a.active{color:var(--ink)}
+nav.primary a.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--ink)}
+nav.primary a:hover{color:var(--ink)}
+
+.header-cta{display:flex;gap:10px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  height:38px;padding:0 16px;border-radius:999px;border:1px solid var(--ink);background:var(--ink);color:#fff;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;
+  transition:transform .15s ease, background .15s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn.secondary{background:transparent;color:var(--ink)}
+.btn.accent{background:var(--accent);border-color:var(--accent)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--hair)}
+.btn .arrow{display:inline-block;transform:translateY(-1px)}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{
+  position:relative;padding:88px 0 64px;
+  overflow:hidden;
+}
+.hero .wrap{position:relative;z-index:2}
+.hero-eyebrow{display:flex;gap:18px;align-items:center;margin-bottom:44px}
+.hero-eyebrow .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;box-shadow:0 0 14px 2px rgba(107,47,224,.6)}
+.hero h1{max-width:18ch}
+.hero h1 .period{color:var(--accent)}
+.hero-sub{margin-top:36px;max-width:58ch;color:var(--muted);font-size:17px;line-height:1.55}
+.hero-sub b{color:var(--ink);font-weight:500}
+
+.hero-actions{display:flex;gap:14px;align-items:center;margin-top:36px;flex-wrap:wrap}
+.hero-price{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-top:18px;display:flex;gap:10px;align-items:center}
+.hero-price .sep{opacity:.4}
+
+/* glow */
+.glow{
+  position:absolute;pointer-events:none;
+  width:920px;height:920px;border-radius:50%;
+  background:radial-gradient(closest-side, rgba(107,47,224,.55), rgba(107,47,224,.18) 40%, transparent 70%);
+  filter:blur(10px);
+  opacity:.9;
+  top:-220px;right:-180px;z-index:0;
+}
+.glow.small{
+  width:420px;height:420px;opacity:.35;
+  background:radial-gradient(closest-side, rgba(107,47,224,.45), transparent 70%);
+  left:-140px;top:260px;right:auto;
+}
+
+/* HUD — right-hand readout */
+.hud{
+  position:absolute;top:92px;right:32px;width:360px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink);
+  z-index:3;
+}
+.hud .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed rgba(0,0,0,.12)}
+.hud .row span:first-child{color:var(--muted);text-transform:uppercase}
+.hud .row span:last-child{color:var(--ink)}
+.hud .big{font-size:42px;line-height:1;letter-spacing:-.02em;font-weight:300;color:var(--ink);font-family:var(--serif);padding:22px 0 6px;border-bottom:1px dashed rgba(0,0,0,.12)}
+.hud .big em{color:var(--muted-2);font-style:italic}
+.hud .stamp{margin-top:18px;display:flex;gap:8px;align-items:center;color:var(--muted);text-transform:uppercase}
+.hud .stamp .chip{border:1px solid var(--hair);padding:4px 8px;border-radius:3px}
+
+.hud .mini{display:flex;flex-direction:column;gap:4px;margin-top:12px}
+.hud .bar{height:2px;background:var(--hair);position:relative}
+.hud .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--accent)}
+
+.hud .legend{position:absolute;top:-22px;left:0;color:var(--muted);font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.hud .legend .tri{display:inline-block;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:5px solid var(--accent);margin-right:6px;transform:translateY(-1px)}
+
+/* framing ticks across the hero */
+.hero-frame{
+  position:absolute;inset:0;pointer-events:none;
+}
+.hero-frame .tick{
+  position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2);text-transform:uppercase;
+}
+
+.confidential{
+  margin-top:80px;display:flex;align-items:center;gap:16px;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+}
+.confidential .line{flex:1;height:1px;background:var(--hair);max-width:120px}
+
+/* =========================================================
+   Section chrome: running ticks, section number labels
+   ========================================================= */
+.section{position:relative;padding:96px 0;border-top:1px solid var(--hair)}
+.section-head{display:flex;gap:24px;align-items:flex-start;margin-bottom:64px}
+.section-head .num{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;min-width:120px;padding-top:10px}
+.section-head h2{flex:1}
+
+/* =========================================================
+   DECISIONS — three-column causes of hesitation
+   ========================================================= */
+.decisions h2 em{color:var(--muted)}
+.decisions h2 .accent-word{color:var(--ink)}
+.cols-3{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--hair);margin-top:12px}
+.cols-3 > .col{padding:28px 24px 36px;border-right:1px solid var(--hair)}
+.cols-3 > .col:last-child{border-right:none}
+.col .idx{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:24px;display:flex;justify-content:space-between}
+.col .idx .slash{color:var(--muted-2)}
+.col .title{font-family:var(--serif);font-size:28px;line-height:1.15;letter-spacing:-.01em;margin-bottom:24px;max-width:14ch}
+.col ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.col ul li{display:flex;gap:10px;align-items:baseline;color:var(--ink-2);font-size:14px}
+.col ul li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--muted-2);display:inline-block;transform:translateY(-2px);flex:0 0 auto}
+.col ul li.primary::before{background:var(--accent)}
+
+.col .scope{margin-top:28px;padding-top:20px;border-top:1px dashed var(--hair);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.col .scope b{color:var(--ink);font-weight:500}
+
+/* =========================================================
+   STATS
+   ========================================================= */
+.stats{padding:80px 0;border-top:1px solid var(--hair)}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.stat{padding:0 24px;border-right:1px solid var(--hair)}
+.stat:first-child{padding-left:0}
+.stat:last-child{border-right:none;padding-right:0}
+.stat .n{font-family:var(--serif);font-size:clamp(72px,9vw,128px);line-height:.95;letter-spacing:-.035em;color:var(--ink)}
+.stat .n sup{font-size:.4em;vertical-align:super;color:var(--muted);font-family:var(--mono);font-weight:400;letter-spacing:.05em;margin-left:4px}
+.stat .caption{margin-top:22px;color:var(--ink-2);font-size:15px;line-height:1.5;max-width:32ch}
+.stat .tag{margin-top:14px;display:block}
+
+/* =========================================================
+   OUTCOMES — three moves
+   ========================================================= */
+.outcomes .lead{max-width:26ch}
+.outcomes .lead em{color:var(--muted)}
+.outcomes-sub{color:var(--muted);font-size:15px;line-height:1.55;margin-top:28px;max-width:50ch}
+.outcomes-sub b{color:var(--ink);font-weight:500}
+.outcomes-actions{margin-top:36px}
+
+.moves{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:72px;border-top:1px solid var(--ink)}
+.move{padding:28px 24px 40px;border-right:1px solid var(--hair);position:relative;min-height:340px;display:flex;flex-direction:column}
+.move:last-child{border-right:none}
+.move:hover{background:#fafafc}
+.move .tag-row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
+.move .tag-row .bracket{color:var(--ink)}
+.move h3{font-family:var(--serif);font-size:48px;line-height:1;letter-spacing:-.02em;color:var(--ink);margin-bottom:18px}
+.move p{color:var(--ink-2);font-size:14px;line-height:1.55;max-width:26ch}
+.move .cta{margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;padding-top:28px;border-top:1px dashed var(--hair);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.move .cta a{color:var(--ink);display:inline-flex;gap:10px;align-items:center}
+.move .cta .arrow{transform:translateY(-1px)}
+
+/* =========================================================
+   FRICTION MEASUREMENT
+   ========================================================= */
+.friction .split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.friction h2{max-width:12ch}
+.friction .copy{color:var(--muted);font-size:15px;line-height:1.6;max-width:44ch;margin-top:28px}
+.friction .copy b{color:var(--ink);font-weight:500}
+.measure-list{margin-top:48px;border-top:1px solid var(--hair)}
+.measure-list li{
+  list-style:none;display:grid;grid-template-columns:60px 1fr auto;gap:24px;
+  align-items:baseline;padding:20px 0;border-bottom:1px solid var(--hair);
+}
+.measure-list li .n{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--muted)}
+.measure-list li .name{font-family:var(--serif);font-size:22px;letter-spacing:-.01em;color:var(--ink)}
+.measure-list li .desc{font-size:13px;color:var(--muted);max-width:36ch;line-height:1.5;margin-top:6px}
+.measure-list li .chev{font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+/* =========================================================
+   FRICTION MAP SNAPSHOT — diagnostic artifact
+   ========================================================= */
+.artifact-wrap{margin-top:64px}
+.artifact{
+  background:linear-gradient(180deg,#fafafc,#ffffff);
+  border:1px solid var(--hair);border-radius:6px;overflow:hidden;
+  box-shadow:0 30px 60px -30px rgba(20,20,40,.15), 0 1px 0 rgba(255,255,255,.7) inset;
+}
+.artifact-bar{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--hair);
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;
+}
+.artifact-bar .dots{display:flex;gap:5px}
+.artifact-bar .dots i{width:9px;height:9px;border-radius:50%;background:#e4e4ea;display:inline-block}
+.artifact-bar .addr{flex:1;text-align:center;color:var(--muted-2)}
+.artifact-bar .addr b{color:var(--ink);font-weight:500}
+.artifact-bar .right{display:flex;gap:14px;color:var(--muted-2)}
+
+.artifact-body{
+  display:grid;grid-template-columns:48px 1fr 240px;min-height:520px;
+}
+.artifact-rail{
+  border-right:1px solid var(--hair);padding:14px 0;display:flex;flex-direction:column;align-items:center;gap:18px;
+  font-family:var(--mono);font-size:10px;color:var(--muted-2);
+}
+.artifact-rail i{display:block;width:22px;height:22px;border:1px solid var(--hair);border-radius:4px;display:flex;align-items:center;justify-content:center}
+.artifact-rail i.active{border-color:var(--accent);color:var(--accent)}
+
+.artifact-main{padding:28px 32px;position:relative}
+.artifact-main .sub{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
+.artifact-main .sub h4{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);font-weight:500}
+.artifact-main .sub .meta{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.1em}
+.artifact-main .delta{
+  position:absolute;top:22px;right:32px;text-align:right;
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted);
+}
+.artifact-main .delta .v{display:block;font-family:var(--serif);font-size:44px;line-height:1;color:var(--accent);letter-spacing:-.02em}
+
+.funnel-chart{margin-top:42px;position:relative;height:200px}
+.funnel-chart svg{width:100%;height:100%;overflow:visible}
+.funnel-chart .lbl{font-family:var(--mono);font-size:10px;fill:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.funnel-chart .step{font-family:var(--mono);font-size:9px;fill:var(--muted-2);letter-spacing:.12em;text-transform:uppercase}
+
+.artifact-bottom{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:28px 32px;border-top:1px solid var(--hair)}
+.mini-chart{position:relative}
+.mini-chart h5{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);margin-bottom:18px;font-weight:500}
+.radar{height:190px}
+.action-line{height:190px}
+
+.artifact-side{border-left:1px solid var(--hair);padding:28px 22px;display:flex;flex-direction:column;gap:18px;background:#fbfbfd}
+.artifact-side .diag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.artifact-side .diag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.artifact-side .entry .meta{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--muted-2);text-transform:uppercase;margin-bottom:6px}
+.artifact-side .entry h6{font-family:var(--serif);font-size:17px;letter-spacing:-.005em;color:var(--ink);margin-bottom:6px;font-weight:400}
+.artifact-side .entry p{font-size:12px;color:var(--muted);line-height:1.5}
+.artifact-side .patch{
+  background:var(--accent);color:#fff;border-radius:6px;padding:16px 18px;margin-top:auto;
+}
+.artifact-side .patch .label{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;opacity:.78;margin-bottom:8px}
+.artifact-side .patch .body{font-size:13px;line-height:1.5}
+.artifact-side .export{border:1px solid var(--hair);padding:10px 14px;border-radius:4px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);cursor:pointer;background:#fff}
+
+.artifact-foot{display:flex;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--hair);font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted-2);text-transform:uppercase}
+
+.friction-stats{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:32px}
+.friction-stats .cell{padding:24px 0;border-top:1px solid var(--hair)}
+.friction-stats .cell .big{font-family:var(--serif);font-size:56px;line-height:1;letter-spacing:-.025em;color:var(--accent)}
+.friction-stats .cell .caption{margin-top:12px;color:var(--ink-2);font-size:14px;line-height:1.45;max-width:30ch}
+.friction-stats .cell .label{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+.cta-row{margin-top:56px;display:flex;gap:12px}
+
+/* =========================================================
+   PROCESS / OUTCOMES BENEFITS GRID
+   ========================================================= */
+.benefits .benefits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:48px}
+.benefits .cell{background:#fff;padding:40px 36px}
+.benefits .cell .idx{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.benefits .cell h3{font-family:var(--serif);font-size:34px;line-height:1.08;letter-spacing:-.01em;margin-bottom:18px}
+.benefits .cell p{color:var(--muted);font-size:14px;line-height:1.6;max-width:40ch}
+.benefits .cell p b{color:var(--ink);font-weight:500}
+
+/* =========================================================
+   WHO IT IS FOR
+   ========================================================= */
+.who h2 em{color:var(--muted)}
+.who .panel{
+  margin-top:56px;background:#f5f5f8;border:1px solid var(--hair);border-radius:8px;
+  padding:56px 48px;display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start;
+  position:relative;overflow:hidden;
+}
+.who .panel::before{
+  content:"";position:absolute;right:-160px;top:-160px;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(closest-side, rgba(107,47,224,.25), transparent 70%);
+  pointer-events:none;
+}
+.who .panel h3{font-family:var(--serif);font-size:clamp(34px,3.4vw,48px);line-height:1.08;letter-spacing:-.015em;position:relative}
+.who .panel h3 .strike{color:var(--muted)}
+.who .panel ol{list-style:none;display:flex;flex-direction:column;gap:22px;position:relative}
+.who .panel ol li{padding-left:36px;position:relative;color:var(--ink-2);font-size:15px;line-height:1.55}
+.who .panel ol li::before{
+  counter-increment:whoitem;content:counter(whoitem,decimal-leading-zero);
+  position:absolute;left:0;top:2px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);
+}
+.who .panel ol{counter-reset:whoitem}
+.who .panel ol li b{color:var(--ink);font-weight:500}
+.who .panel ol li.primary{color:var(--accent);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer{border-top:1px solid var(--hair);padding:72px 0 40px;background:#fff;position:relative;overflow:hidden}
+footer::before{
+  content:"";position:absolute;left:-200px;bottom:-200px;width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(closest-side, rgba(107,47,224,.18), transparent 70%);
+  pointer-events:none;
+}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;position:relative;z-index:1}
+.footer-brand .word{font-family:var(--mono);font-size:13px;letter-spacing:.32em;text-transform:uppercase}
+.footer-brand p{font-family:var(--serif);font-size:28px;line-height:1.1;letter-spacing:-.01em;margin-top:28px;max-width:20ch}
+.footer-brand .stamp{margin-top:28px;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.footer-col h4{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.footer-col a{color:var(--ink);font-size:14px}
+.footer-col a:hover{color:var(--accent)}
+
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:72px;padding-top:28px;border-top:1px solid var(--hair);position:relative;z-index:1}
+.footer-bottom .copy{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.footer-bottom .legal{display:flex;gap:28px}
+.footer-bottom .legal a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* huge wordmark at bottom */
+.wordmark{
+  margin-top:64px;font-family:var(--serif);font-size:clamp(80px,18vw,260px);
+  line-height:.9;letter-spacing:-.04em;color:var(--ink);white-space:nowrap;overflow:hidden;
+  text-align:center;position:relative;z-index:1;
+}
+.wordmark .accent{color:var(--accent);font-style:italic}
+
+/* =========================================================
+   responsive
+   ========================================================= */
+@media (max-width: 980px){
+  .hud{position:static;width:auto;margin:24px 0}
+  .cols-3, .stats-grid, .moves, .footer-top, .benefits .benefits-grid, .who .panel, .artifact-body, .artifact-bottom, .friction .split, .friction-stats{grid-template-columns:1fr}
+  nav.primary{display:none}
+  .stat{padding:16px 0;border-right:none;border-bottom:1px solid var(--hair)}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header class="header">
+  <div class="wrap header-inner">
+    <div class="brand">
+      <span class="sigil"></span>
+      <span class="brand-word">
+        <span>R&nbsp;A&nbsp;G&nbsp;N&nbsp;A&nbsp;R&nbsp;O&nbsp;K</span>
+        <span class="dot"></span>
+        <span>D&nbsp;E&nbsp;S&nbsp;I&nbsp;G&nbsp;N</span>
+        <span class="dot"></span>
+        <span>L&nbsp;A&nbsp;B&nbsp;S</span>
+      </span>
+    </div>
+    <nav class="primary">
+      <a href="#" class="active">home</a>
+      <a href="#audit">Audit</a>
+      <a href="#sprint">Sprint</a>
+      <a href="#build">Build</a>
+      <a href="#levels">Decision Levels</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn" href="#audit">Start With an Audit <span class="arrow">→</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="glow"></div>
+  <div class="glow small"></div>
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      <span class="mono" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">// decisions&nbsp;·&nbsp;v.016&nbsp;·&nbsp;iso 241</span>
+    </div>
+
+    <h1 class="h-display">
+      We diagnose why digital<br>
+      products lose conversion,<br>
+      and redesign the decision<br>
+      architecture<span class="period">.</span>
+      <br><em>not the interface.</em>
+    </h1>
+
+    <p class="hero-sub">
+      When users hesitate or abandon, the issue is rarely visual, <b>it's structural.</b>
+      We identify where decisions break inside your flows — so you don't redesign blind.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn accent" href="#audit">Unlock Insights with an Audit <span class="arrow">→</span></a>
+      <a class="btn ghost" href="#levels">See Decision Levels <span class="arrow">↗</span></a>
+    </div>
+    <div class="hero-price">
+      <span>From €1,900</span><span class="sep">·</span><span>Delivery in 7–10 days</span>
+    </div>
+
+    <!-- HUD -->
+    <aside class="hud" aria-hidden="true">
+      <div class="row"><span>System_origin</span><span>RF&nbsp;·&nbsp;ISO 241</span></div>
+      <div class="row"><span>Branch_alpha</span><span>11&nbsp;·&nbsp;S</span></div>
+      <div class="row"><span>Critical_function</span><span>02.</span></div>
+      <div class="big">1.24<em>x</em></div>
+      <div class="row"><span>Scalability_factor</span><span>+1.24x</span></div>
+      <div class="row"><span>Drift_coefficient</span><span>0.89</span></div>
+      <div class="mini">
+        <div class="bar"><i style="width:64%"></i></div>
+        <div class="bar"><i style="width:38%"></i></div>
+        <div class="bar"><i style="width:82%"></i></div>
+      </div>
+      <div class="stamp">
+        <span class="chip">∎ LIVE</span>
+        <span>telemetry stable</span>
+      </div>
+    </aside>
+
+    <div class="confidential">
+      <span class="line"></span>
+      <span>Confidential by default. Proof shown through real diagnostic artifacts, not logos.</span>
+      <span class="line"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== DECISIONS ==================== -->
+<section class="section decisions">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="num">// decisions</div>
+      <h2 class="h-section">
+        <span class="accent-word">Every hesitation in your product</span> <em>is the result of how decisions are structured, weighted, and sequenced.</em>
+      </h2>
+    </div>
+
+    <div class="cols-3">
+      <div class="col">
+        <div class="idx"><span>Decision weight conflict</span><span class="slash">/ 01</span></div>
+        <div class="title">Competing visual anchors</div>
+        <ul>
+          <li class="primary">Priority imbalance</li>
+          <li>Equal-weight triggers</li>
+          <li>CTA conflict</li>
+          <li>Action overload</li>
+          <li>Hierarchy conflict</li>
+          <li>Trust suppression</li>
+        </ul>
+        <div class="scope"><b>1–2 Weeks</b> · Typical Fix Scope</div>
+      </div>
+
+      <div class="col">
+        <div class="idx"><span>Sequencing failure</span><span class="slash">/ 02</span></div>
+        <div class="title">Unclear step progression</div>
+        <ul>
+          <li class="primary">Premature branching</li>
+          <li>Context inversion</li>
+          <li>Information delay</li>
+          <li>Misordered flow</li>
+          <li>Commitment pressure</li>
+          <li>Competing signals</li>
+        </ul>
+        <div class="scope"><b>2–3 Weeks</b> · Typical Fix Scope</div>
+      </div>
+
+      <div class="col">
+        <div class="idx"><span>Signal collision</span><span class="slash">/ 03</span></div>
+        <div class="title">Primary signal dilution</div>
+        <ul>
+          <li class="primary">Cognitive spikes</li>
+          <li>Visual noise accumulation</li>
+          <li>Trust suppression</li>
+          <li>Context inversion</li>
+          <li>Hierarchy conflict</li>
+          <li>Competing anchors</li>
+        </ul>
+        <div class="scope"><b>System-Level</b> · Impact</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STATS ==================== -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="n">92<sup>%</sup></div>
+        <div class="caption">Over 90% of trust perception is influenced by visual hierarchy and signal alignment long before conversion logic is tested.</div>
+        <span class="tag">01 / Trust perception</span>
+      </div>
+      <div class="stat">
+        <div class="n">64<sup>%</sup></div>
+        <div class="caption">More than half of abandonment happens at flow transitions — not because users lack intent, but because the sequence breaks momentum.</div>
+        <span class="tag">02 / Abandonment</span>
+      </div>
+      <div class="stat">
+        <div class="n">50<sup>ms</sup></div>
+        <div class="caption">A single 50ms hesitation at a decision point is enough to double drop-off on downstream actions.</div>
+        <span class="tag">03 / Cognitive delay</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== OUTCOMES / THREE MOVES ==================== -->
+<section class="section outcomes">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="num">// outcomes</div>
+      <div>
+        <h2 class="h-section lead">Clarity doesn't happen <em>by accident,</em> it happens when structure is diagnosed, corrected, and reconstructed.</h2>
+        <p class="outcomes-sub">There are only three moves. <b>Most teams start with the third.</b><br>Choose clarity. Or redesign the wrong thing, again.</p>
+        <div class="outcomes-actions"><a class="btn" href="#audit">Start With an Audit <span class="arrow">→</span></a></div>
+      </div>
+    </div>
+
+    <div class="moves">
+      <div class="move">
+        <div class="tag-row"><span>Audit</span><span class="bracket">01 / [ DIAGNOSE ]</span></div>
+        <h3>Audit</h3>
+        <p>Locate the decision break. Map the system. Remove assumption.</p>
+        <div class="cta"><a href="#audit">→ What We Diagnose <span class="arrow">01 /</span></a></div>
+      </div>
+      <div class="move">
+        <div class="tag-row"><span>Sprint</span><span class="bracket">02 / [ DECIDE ]</span></div>
+        <h3>Sprint</h3>
+        <p>Define the correction. Protect momentum. Eliminate friction.</p>
+        <div class="cta"><a href="#sprint">→ Define the Correction <span class="arrow">02 /</span></a></div>
+      </div>
+      <div class="move">
+        <div class="tag-row"><span>Build</span><span class="bracket">03 / [ EXECUTE ]</span></div>
+        <h3>Build</h3>
+        <p>Implement with constraint. Measure impact. Refine deliberately.</p>
+        <div class="cta"><a href="#build">→ Execute with Control <span class="arrow">03 /</span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FRICTION MEASUREMENT ==================== -->
+<section class="section friction">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="num">// friction</div>
+      <h2 class="h-section">How we measure <em>decision friction.</em></h2>
+    </div>
+
+    <div class="split">
+      <div>
+        <p class="copy">Behavioral Drop-Off Analysis, Hierarchy Conflict Detection, Decision-Delay Timing, Cognitive-Load Hotspots and Cross-Flow Instability Mapping — applied in sequence against your live funnel to surface where structure fails.</p>
+        <a class="btn" style="margin-top:28px" href="#audit">Start With an Audit <span class="arrow">→</span></a>
+
+        <ul class="measure-list">
+          <li>
+            <span class="n">01</span>
+            <div>
+              <div class="name">Funnel segmentation</div>
+              <div class="desc">Split drop-off by intent cohort, channel, and decision depth.</div>
+            </div>
+            <span class="chev">→</span>
+          </li>
+          <li>
+            <span class="n">02</span>
+            <div>
+              <div class="name">Decision delay analysis</div>
+              <div class="desc">Measure hesitation latency at each commitment boundary.</div>
+            </div>
+            <span class="chev">→</span>
+          </li>
+          <li>
+            <span class="n">03</span>
+            <div>
+              <div class="name">Cognitive load hotspots</div>
+              <div class="desc">Locate screens where signal density exceeds processing capacity.</div>
+            </div>
+            <span class="chev">→</span>
+          </li>
+          <li>
+            <span class="n">04</span>
+            <div>
+              <div class="name">Hierarchy conflict detection</div>
+              <div class="desc">Expose competing signals that dilute clarity and suppress conversion.</div>
+            </div>
+            <span class="chev">→</span>
+          </li>
+          <li>
+            <span class="n">05</span>
+            <div>
+              <div class="name">Cross-flow instability mapping</div>
+              <div class="desc">Trace how upstream decisions destabilize later steps across sessions.</div>
+            </div>
+            <span class="chev">→</span>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div style="background:#f7f7fa;border:1px solid var(--hair);border-radius:6px;padding:28px">
+          <div class="tag" style="margin-bottom:18px">// diagnostic preview</div>
+          <h3 class="h-card" style="margin-bottom:14px">Friction Map Snapshot</h3>
+          <p class="body" style="color:var(--muted);max-width:40ch">Identify where users hesitate, exit, or abandon across critical decision points.</p>
+          <ul style="list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:12px;color:var(--ink-2)">
+            <li>· Decision conflict heatmap</li>
+            <li>· Structural layer breakdown</li>
+            <li>· Step-by-step friction curve</li>
+            <li>· Weighted fix priority recommendation</li>
+          </ul>
+          <div style="margin-top:22px;padding-top:16px;border-top:1px dashed var(--hair);font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase">
+            Across audits, we identify <b style="color:var(--ink)">27–52 structural friction points</b> per system.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- diagnostic artifact -->
+    <div class="artifact-wrap" id="artifact">
+      <div class="artifact">
+        <div class="artifact-bar">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <div class="addr">LOC:&nbsp;49.7123°&nbsp;N,&nbsp;70.5088°&nbsp;W &nbsp;·&nbsp;&nbsp;<b>LIVE_PROD_ACTIVE</b></div>
+          <div class="right"><span>↗</span><span>⋯</span></div>
+        </div>
+
+        <div class="artifact-body">
+          <div class="artifact-rail">
+            <i class="active" style="color:var(--accent);border-color:var(--accent)">◧</i>
+            <i>✳</i>
+            <i>⋄</i>
+            <i>◉</i>
+          </div>
+          <div class="artifact-main">
+            <div class="sub">
+              <h4>Step-to-Step abandonment delta</h4>
+              <span class="meta">Ω = 0.42 · variance analysis</span>
+            </div>
+            <div class="delta">
+              <span>Peak attrition</span>
+              <span class="v">−24.8%</span>
+            </div>
+
+            <!-- Funnel chart -->
+            <div class="funnel-chart">
+              <svg viewBox="0 0 600 200" preserveAspectRatio="none">
+                <!-- grid -->
+                <g stroke="#eee" stroke-width="1">
+                  <line x1="0" y1="40" x2="600" y2="40"/>
+                  <line x1="0" y1="90" x2="600" y2="90"/>
+                  <line x1="0" y1="140" x2="600" y2="140"/>
+                </g>
+                <!-- funnel polyline -->
+                <polyline points="40,60 140,88 260,150 380,130 500,170"
+                  fill="none" stroke="#0a0a0b" stroke-width="1.2"/>
+                <!-- step boxes -->
+                <g font-family="JetBrains Mono" font-size="8" fill="#9a9aa3" letter-spacing="1">
+                  <g>
+                    <rect x="20" y="52" width="40" height="16" fill="#fff" stroke="#d8d8de"/>
+                    <text x="40" y="62" text-anchor="middle">ENTRY</text>
+                  </g>
+                  <g>
+                    <rect x="120" y="80" width="40" height="16" fill="#fff" stroke="#d8d8de"/>
+                    <text x="140" y="90" text-anchor="middle">VALUE</text>
+                  </g>
+                  <g>
+                    <rect x="230" y="136" width="60" height="28" fill="#fff" stroke="#6b2fe0" stroke-width="1.5"/>
+                    <text x="260" y="150" text-anchor="middle" fill="#6b2fe0">ADD FRICTION</text>
+                    <text x="260" y="160" text-anchor="middle" fill="#6b2fe0">STEP 03</text>
+                  </g>
+                  <g>
+                    <rect x="360" y="122" width="40" height="16" fill="#fff" stroke="#d8d8de"/>
+                    <text x="380" y="132" text-anchor="middle">COMMIT</text>
+                  </g>
+                  <g>
+                    <rect x="480" y="162" width="40" height="16" fill="#fff" stroke="#d8d8de"/>
+                    <text x="500" y="172" text-anchor="middle">FULFILL</text>
+                  </g>
+                </g>
+                <!-- markers -->
+                <circle cx="260" cy="150" r="3" fill="#6b2fe0"/>
+              </svg>
+            </div>
+
+            <div class="artifact-bottom">
+              <div class="mini-chart">
+                <h5>Decision Delay Timing</h5>
+                <svg class="radar" viewBox="0 0 220 190">
+                  <g fill="none" stroke="#e6e6ec">
+                    <polygon points="110,20 195,75 170,170 50,170 25,75"/>
+                    <polygon points="110,55 165,85 150,150 70,150 55,85"/>
+                  </g>
+                  <polygon points="110,40 178,78 155,160 68,158 45,86"
+                    fill="rgba(107,47,224,.14)" stroke="#6b2fe0" stroke-width="1.3"/>
+                  <g fill="#6b2fe0">
+                    <circle cx="110" cy="40" r="2.4"/>
+                    <circle cx="178" cy="78" r="2.4"/>
+                    <circle cx="155" cy="160" r="2.4"/>
+                    <circle cx="68" cy="158" r="2.4"/>
+                    <circle cx="45" cy="86" r="2.4"/>
+                  </g>
+                  <g font-family="JetBrains Mono" font-size="7.5" fill="#9a9aa3" letter-spacing="1">
+                    <text x="110" y="14" text-anchor="middle">ATTENTION</text>
+                    <text x="205" y="75">DELIBERATE</text>
+                    <text x="180" y="183">COMMIT</text>
+                    <text x="15" y="183">DOUBT</text>
+                    <text x="0" y="82">SCAN</text>
+                  </g>
+                </svg>
+              </div>
+
+              <div class="mini-chart">
+                <h5>Action Hierarchy Imbalance</h5>
+                <svg class="action-line" viewBox="0 0 220 190">
+                  <g stroke="#e6e6ec" stroke-width="1">
+                    <line x1="20" y1="30" x2="200" y2="30"/>
+                    <line x1="20" y1="90" x2="200" y2="90"/>
+                    <line x1="20" y1="150" x2="200" y2="150"/>
+                  </g>
+                  <path d="M 20 60 Q 80 88, 130 128 T 200 150" fill="none" stroke="#0a0a0b" stroke-width="1.2"/>
+                  <g font-family="JetBrains Mono" font-size="7.5" fill="#9a9aa3" letter-spacing="1">
+                    <text x="24" y="54">CONTINUE</text>
+                    <rect x="148" y="134" width="46" height="18" stroke="#6b2fe0" fill="#fff"/>
+                    <text x="171" y="146" text-anchor="middle" fill="#6b2fe0">BACK</text>
+                    <text x="171" y="168" text-anchor="middle" fill="#6b2fe0">UP</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="artifact-side">
+            <div class="diag">Diagnostic_log</div>
+            <div class="entry">
+              <div class="meta">Log 04—007</div>
+              <h6>Critical Imbalance</h6>
+              <p>Step 3 shows 42% higher dropout than baseline. Over 3 users in high fixed-entry friction exceeded norm expectation.</p>
+            </div>
+            <div class="entry">
+              <div class="meta">Log 04—009</div>
+              <h6>Velocity Trap</h6>
+              <p>Navigation micro-copy failing to provide adequate cognitive wayfinding.</p>
+            </div>
+            <div class="patch">
+              <div class="label">Suggested patch</div>
+              <div class="body">Re-orient action hierarchy towards "information-first" protocol.</div>
+            </div>
+            <button class="export">Export schematic <span>↗</span></button>
+          </div>
+        </div>
+        <div class="artifact-foot">
+          <span>Ω.03.13.22</span>
+          <span>Decision_lvl &nbsp;/&nbsp; compression 0.92</span>
+        </div>
+      </div>
+
+      <div class="friction-stats">
+        <div class="cell">
+          <div class="label">Abandonment delta</div>
+          <div class="big">−24.8<span style="font-size:.5em">%</span></div>
+          <div class="caption">Typical attrition peak located at the third commitment boundary across audited systems.</div>
+        </div>
+        <div class="cell">
+          <div class="label">Per system · structural</div>
+          <div class="big">27–52</div>
+          <div class="caption">Structural friction points identified per audit, ranked by severity and downstream impact.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROCESS / BENEFITS ==================== -->
+<section class="section benefits">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="num">// process</div>
+      <h2 class="h-section">Most structural work happens inside sensitive systems. <em>Instead of logos, we show process artifacts and measurable outcomes.</em></h2>
+    </div>
+    <p class="body-lg" style="max-width:56ch;color:var(--muted)">This is what a real structural audit actually looks like.</p>
+
+    <div class="benefits-grid">
+      <div class="cell">
+        <div class="idx">01 / Depth</div>
+        <h3>Structural Depth Identified</h3>
+        <p>We uncover between <b>27 and 52 structural friction points</b> per system, ranked by severity and impact across the funnel.</p>
+      </div>
+      <div class="cell">
+        <div class="idx">02 / Privacy</div>
+        <h3>Confidential by Default</h3>
+        <p>No logos on walls, no press releases. Every engagement runs under <b>mutual NDA</b> with artifacts anonymized for public reference.</p>
+      </div>
+      <div class="cell">
+        <div class="idx">03 / Speed</div>
+        <h3>Rapid Time-to-Clarity</h3>
+        <p>Within approximately <b>10 days</b>, teams receive a prioritized diagnosis instead of speculative redesign debates.</p>
+      </div>
+      <div class="cell">
+        <div class="idx">04 / Pattern</div>
+        <h3>Predictable Failure Pattern</h3>
+        <p>Most systems collapse at <b>steps two or three</b>, where decision overload replaces structured progression.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHO IT IS FOR ==================== -->
+<section class="section who">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="num">// who is it for</div>
+      <h2 class="h-section">Built for products <em>where structural clarity directly impacts performance, revenue, or risk.</em></h2>
+    </div>
+
+    <div class="panel">
+      <div>
+        <h3>Clarity Before Change.</h3>
+        <p style="margin-top:28px;color:var(--muted);font-size:15px;line-height:1.6;max-width:40ch">Three decision gates — you only engage if you hit the third.</p>
+      </div>
+      <ol>
+        <li>If your numbers are stable and your flow is controlled — <b>you may not need us.</b></li>
+        <li>If your conversion rates are structurally sound and your growth isn't friction-bound — <b>continue.</b></li>
+        <li class="primary">→ If decisions are unclear or redesign feels like guesswork — proceed below.</li>
+        <li style="margin-top:18px"><a class="btn accent" href="#audit">Start With an Audit <span class="arrow">→</span></a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="word">R&nbsp;A&nbsp;G&nbsp;N&nbsp;A&nbsp;R&nbsp;O&nbsp;K &nbsp;·&nbsp; L&nbsp;A&nbsp;B&nbsp;S</div>
+        <p>Audit-first design lab. <em style="color:var(--muted);font-style:italic">Truth before design.</em></p>
+        <div class="stamp">Wrong redesigns cost more.</div>
+      </div>
+      <div class="footer-col">
+        <h4>Main</h4>
+        <ul>
+          <li><a href="#audit">Audit · Cases</a></li>
+          <li><a href="#sprint">Sprints · Principles</a></li>
+          <li><a href="#build">Build · Resources</a></li>
+          <li><a href="#process">Process</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Request</h4>
+        <ul>
+          <li><a href="#audit">Request Audit</a></li>
+          <li><a href="#sprint">Request Sprint</a></li>
+          <li><a href="#build">Request Build</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@ragnarok.design">hello@ragnarok.design</a></li>
+          <li><a href="#">Schedule call</a></li>
+          <li><a href="#">Vilnius · Remote</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="wordmark">Ragnarok <span class="accent">Labs.</span></div>
+
+    <div class="footer-bottom">
+      <span class="copy">© 2026 Ragnarok Design Lab</span>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Imprint</a>
+        <a href="#">ISO 241 compliance</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
