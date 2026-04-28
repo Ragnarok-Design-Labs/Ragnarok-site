@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 588 641"><rect width="588" height="641" rx="96" fill="#6b2fe0"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 588 641"><circle cx="294" cy="320.5" r="294" fill="#6D28D9"/><g transform="translate(88 96) scale(.7)">
     <g transform="matrix(1,0,0,1,-10792.078944,-6687.264919)">
         <g transform="matrix(1.419912,0,0,1,7447.910495,2544.449769)">
             <g id="Symbol" transform="matrix(0.413915,0,0,0.587724,589.58937,566.577285)">
@@ -6,4 +6,4 @@
             </g>
         </g>
     </g>
-</svg>
+</g></svg>
